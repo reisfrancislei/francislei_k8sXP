@@ -1,0 +1,33 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata: 
+  name: report-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 150M
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /opt/k8s
+    server: 10.142.0.2
+    readOnly: false
+
+kind: PersistentVolume
+apiVersion: v1
+metadata: 
+  name: meu-vol
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 100M
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /opt/giropops
+    server: 10.142.0.2
+    readOnly: false

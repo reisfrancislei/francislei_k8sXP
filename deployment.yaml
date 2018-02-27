@@ -1,0 +1,69 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2018-02-27T00:23:44Z
+  generation: 1
+  labels:
+    run: nginx
+    app: report-app
+  name: nginx-report-app
+  namespace: default
+  resourceVersion: "159952"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/nginx-report-app
+  uid: 78345745-1b54-11e8-8a86-42010a8e0002
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      run: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: nginx
+        dc: UK
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        volumeMounts:
+        - name: report-pv
+          mountPath: /usr/share/nginx/html
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      nodeSelector:
+        dc: UK
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: report-pv
+        persistentVolumeClaim:
+          claimName: report-pvc
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2018-02-27T00:23:44Z
+    lastUpdateTime: 2018-02-27T00:23:44Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
