@@ -27,22 +27,21 @@ exportfs -ar
 ```sh
 echo "Curso kubernetes - Codeops" >> /opt/k8s/index.html
 ```
-<br>
 3 - Criar <i><b>PV</b></i>
 ```sh
 kubectl create -f pv.yaml
 ```
-<br>
+
 4 - Criar <i><b>PVC</b></i>
 ```sh
 kubectl create -f pvc.yaml
 ```
-<br>
+
 5 - Criar <i><b>Deployment</b></i>
 ```sh
 kubectl create -f deployment.yaml
 ```
-<br>
+
 6 - Criar <i><b>Service</b></i>
 ```sh
 kubectl create -f service.yaml
